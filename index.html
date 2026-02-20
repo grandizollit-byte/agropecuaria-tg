@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TG Agro Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">🐂</span>
+        <div>
+          <div class="logo-title">TG AGRO PRO</div>
+          <div class="logo-sub">Gestão Pecuária</div>
+        </div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></a>
+      <a class="nav-item" data-page="lotes" onclick="navigate('lotes')"><span class="nav-icon">🏠</span><span class="nav-label">Lotes</span></a>
+      <a class="nav-item" data-page="animais" onclick="navigate('animais')"><span class="nav-icon">🐄</span><span class="nav-label">Animais</span></a>
+      <a class="nav-item" data-page="pesagens" onclick="navigate('pesagens')"><span class="nav-icon">⚖️</span><span class="nav-label">Pesagens</span></a>
+      <a class="nav-item" data-page="vendas" onclick="navigate('vendas')"><span class="nav-icon">💰</span><span class="nav-label">Vendas</span></a>
+      <a class="nav-item" data-page="custos" onclick="navigate('custos')"><span class="nav-icon">📋</span><span class="nav-label">Custos</span></a>
+      <a class="nav-item" data-page="financeiro" onclick="navigate('financeiro')"><span class="nav-icon">📈</span><span class="nav-label">Financeiro</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-setup" onclick="openSetup()">⚙️ Configurar BD</button>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-date" id="topbarDate"></span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <section id="page-dashboard" class="page active">
+        <div class="cards-grid">
+          <div class="card card-green"><div class="card-label">Total de Animais</div><div class="card-value" id="totalAnimais">—</div><div class="card-sub">em todos os lotes</div></div>
+          <div class="card card-amber"><div class="card-label">Peso Total (kg)</div><div class="card-value" id="pesoTotal">—</div><div class="card-sub">última pesagem</div></div>
+          <div class="card card-blue"><div class="card-label">Receita Total</div><div class="card-value" id="receitaTotal">—</div><div class="card-sub">em vendas</div></div>
+          <div class="card card-red"><div class="card-label">Custos Totais</div><div class="card-value" id="custosTotal">—</div><div class="card-sub">despesas gerais</div></div>
+          <div class="card card-purple"><div class="card-label">Lucro Líquido</div><div class="card-value" id="lucroTotal">—</div><div class="card-sub">receita - custos</div></div>
+          <div class="card card-teal"><div class="card-label">Lotes Ativos</div><div class="card-value" id="lotesAtivos">—</div><div class="card-sub">em operação</div></div>
+        </div>
+        <div class="section-title">Resumo por Lote</div>
+        <div class="table-wrap">
+          <table class="table" id="dashLotesTable">
+            <thead><tr><th>Lote</th><th>Animais</th><th>Peso Médio (kg)</th><th>@ Médias</th><th>GMD (kg/dia)</th><th>Status</th></tr></thead>
+            <tbody id="dashLotesTbody"><tr><td colspan="6" class="empty">Carregando...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- LOTES -->
+      <section id="page-lotes" class="page">
+        <div class="toolbar">
+          <button class="btn btn-primary" onclick="openModal('modalLote'); document.getElementById('loteId').value=''; document.getElementById('modalLoteTitle').textContent='Novo Lote'">+ Novo Lote</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Nome</th><th>Raça</th><th>Finalidade</th><th>Data Entrada</th><th>Área (ha)</th><th>Status</th><th>Ações</th></tr></thead>
+            <tbody id="lotesTbody"><tr><td colspan="7" class="empty">Nenhum lote cadastrado.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ANIMAIS -->
+      <section id="page-animais" class="page">
+        <div class="toolbar">
+          <button class="btn btn-primary" onclick="openModalAnimal()">+ Novo Animal</button>
+          <select class="select-filter" id="filtroLoteAnimal" onchange="loadAnimais()"><option value="">Todos os lotes</option></select>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Brinco</th><th>Lote</th><th>Raça</th><th>Sexo</th><th>Peso Entrada (kg)</th><th>@ Entrada</th><th>Data Entrada</th><th>Valor Compra</th><th>Ações</th></tr></thead>
+            <tbody id="animaisTbody"><tr><td colspan="9" class="empty">Nenhum animal cadastrado.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PESAGENS -->
+      <section id="page-pesagens" class="page">
+        <div class="toolbar">
+          <button class="btn btn-primary" onclick="openModalPesagem()">+ Nova Pesagem</button>
+          <select class="select-filter" id="filtroLotePesagem" onchange="loadPesagens()"><option value="">Todos os lotes</option></select>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Brinco</th><th>Lote</th><th>Data</th><th>Peso (kg)</th><th>Arrobas (@)</th><th>GMD (kg/dia)</th><th>Ações</th></tr></thead>
+            <tbody id="pesagensTbody"><tr><td colspan="7" class="empty">Nenhuma pesagem registrada.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- VENDAS -->
+      <section id="page-vendas" class="page">
+        <div class="toolbar">
+          <button class="btn btn-primary" onclick="openModalVenda()">+ Nova Venda</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Data</th><th>Brinco</th><th>Lote</th><th>Peso (kg)</th><th>Arrobas</th><th>R$/@</th><th>Valor Total</th><th>Comprador</th><th>Ações</th></tr></thead>
+            <tbody id="vendasTbody"><tr><td colspan="9" class="empty">Nenhuma venda registrada.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CUSTOS -->
+      <section id="page-custos" class="page">
+        <div class="toolbar">
+          <button class="btn btn-primary" onclick="openModalCusto()">+ Novo Custo</button>
+          <select class="select-filter" id="filtroCategoriaCusto" onchange="loadCustos()">
+            <option value="">Todas categorias</option>
+            <option value="alimentacao">Alimentação</option>
+            <option value="saude">Saúde / Veterinário</option>
+            <option value="mao_de_obra">Mão de Obra</option>
+            <option value="infraestrutura">Infraestrutura</option>
+            <option value="transporte">Transporte</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Lote</th><th>Valor (R$)</th><th>Ações</th></tr></thead>
+            <tbody id="custosTbody"><tr><td colspan="6" class="empty">Nenhum custo registrado.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FINANCEIRO -->
+      <section id="page-financeiro" class="page">
+        <div class="fin-grid">
+          <div class="fin-card"><div class="fin-label">Total Receitas</div><div class="fin-value green" id="finReceitas">R$ 0,00</div></div>
+          <div class="fin-card"><div class="fin-label">Total Custos</div><div class="fin-value red" id="finCustos">R$ 0,00</div></div>
+          <div class="fin-card"><div class="fin-label">Lucro Líquido</div><div class="fin-value" id="finLucro">R$ 0,00</div></div>
+          <div class="fin-card"><div class="fin-label">Margem</div><div class="fin-value" id="finMargem">0%</div></div>
+        </div>
+        <div class="section-title">Extrato por Lote</div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Lote</th><th>Receitas</th><th>Custos</th><th>Lucro</th><th>Margem</th></tr></thead>
+            <tbody id="finLotesTbody"><tr><td colspan="5" class="empty">Carregando...</td></tr></tbody>
+          </table>
+        </div>
+        <div class="section-title">Custos por Categoria</div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Categoria</th><th>Total (R$)</th><th>%</th></tr></thead>
+            <tbody id="finCategoriasTbody"><tr><td colspan="3" class="empty">Carregando...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="modalSetup">
+    <div class="modal">
+      <div class="modal-header"><h2>⚙️ Configurar Banco de Dados</h2><button class="modal-close" onclick="closeModal('modalSetup')">✕</button></div>
+      <div class="modal-body">
+        <p class="modal-info">Cole sua connection string do Neon PostgreSQL para inicializar as tabelas.</p>
+        <label>DATABASE_URL</label>
+        <input type="text" id="setupDbUrl" placeholder="postgresql://user:pass@host/db?sslmode=require" />
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="runSetup()">Inicializar Banco</button>
+          <button class="btn btn-outline" onclick="closeModal('modalSetup')">Fechar</button>
+        </div>
+        <div id="setupMsg" class="setup-msg"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalLote">
+    <div class="modal">
+      <div class="modal-header"><h2 id="modalLoteTitle">Novo Lote</h2><button class="modal-close" onclick="closeModal('modalLote')">✕</button></div>
+      <div class="modal-body">
+        <input type="hidden" id="loteId" />
+        <div class="form-row">
+          <div class="form-group"><label>Nome do Lote *</label><input type="text" id="loteNome" placeholder="Ex: Lote A - Nelore 2024" /></div>
+          <div class="form-group"><label>Raça</label><input type="text" id="loteRaca" placeholder="Ex: Nelore" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Finalidade</label><select id="loteFinalidade"><option value="corte">Corte</option><option value="leite">Leite</option><option value="recria">Recria</option><option value="cria">Cria</option></select></div>
+          <div class="form-group"><label>Data de Entrada</label><input type="date" id="loteDataEntrada" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Área (hectares)</label><input type="number" id="loteArea" placeholder="0.00" step="0.01" /></div>
+          <div class="form-group"><label>Status</label><select id="loteStatus"><option value="ativo">Ativo</option><option value="encerrado">Encerrado</option></select></div>
+        </div>
+        <div class="form-group"><label>Observações</label><textarea id="loteObs" placeholder="Observações opcionais..."></textarea></div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="saveLote()">Salvar</button>
+          <button class="btn btn-outline" onclick="closeModal('modalLote')">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalAnimal">
+    <div class="modal">
+      <div class="modal-header"><h2 id="modalAnimalTitle">Novo Animal</h2><button class="modal-close" onclick="closeModal('modalAnimal')">✕</button></div>
+      <div class="modal-body">
+        <input type="hidden" id="animalId" />
+        <div class="form-row">
+          <div class="form-group"><label>Nº Brinco *</label><input type="text" id="animalBrinco" placeholder="Ex: 001" /></div>
+          <div class="form-group"><label>Lote *</label><select id="animalLote"></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Raça</label><input type="text" id="animalRaca" placeholder="Nelore, Angus..." /></div>
+          <div class="form-group"><label>Sexo</label><select id="animalSexo"><option value="macho">Macho</option><option value="femea">Fêmea</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Peso de Entrada (kg) *</label><input type="number" id="animalPesoEntrada" placeholder="0" step="0.1" oninput="calcArrobaEntrada()" /></div>
+          <div class="form-group"><label>Arrobas Entrada</label><input type="text" id="animalArrobaEntrada" readonly placeholder="—" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Data de Entrada</label><input type="date" id="animalDataEntrada" /></div>
+          <div class="form-group"><label>Valor de Compra (R$)</label><input type="number" id="animalValorCompra" placeholder="0.00" step="0.01" /></div>
+        </div>
+        <div class="form-group"><label>Observações</label><textarea id="animalObs" placeholder="Observações opcionais..."></textarea></div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="saveAnimal()">Salvar</button>
+          <button class="btn btn-outline" onclick="closeModal('modalAnimal')">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalPesagem">
+    <div class="modal">
+      <div class="modal-header"><h2>Nova Pesagem</h2><button class="modal-close" onclick="closeModal('modalPesagem')">✕</button></div>
+      <div class="modal-body">
+        <input type="hidden" id="pesagemId" />
+        <div class="form-row">
+          <div class="form-group"><label>Animal (Brinco) *</label><select id="pesagemAnimal"></select></div>
+          <div class="form-group"><label>Data da Pesagem *</label><input type="date" id="pesagemData" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Peso (kg) *</label><input type="number" id="pesagemPeso" placeholder="0" step="0.1" oninput="calcArrobaPesagem()" /></div>
+          <div class="form-group"><label>Arrobas</label><input type="text" id="pesagemArroba" readonly placeholder="—" /></div>
+        </div>
+        <div class="form-group"><label>Observações</label><textarea id="pesagemObs" placeholder="Observações opcionais..."></textarea></div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="savePesagem()">Salvar</button>
+          <button class="btn btn-outline" onclick="closeModal('modalPesagem')">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalVenda">
+    <div class="modal">
+      <div class="modal-header"><h2>Nova Venda</h2><button class="modal-close" onclick="closeModal('modalVenda')">✕</button></div>
+      <div class="modal-body">
+        <input type="hidden" id="vendaId" />
+        <div class="form-row">
+          <div class="form-group"><label>Animal (Brinco) *</label><select id="vendaAnimal"></select></div>
+          <div class="form-group"><label>Data da Venda *</label><input type="date" id="vendaData" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Peso de Venda (kg) *</label><input type="number" id="vendaPeso" placeholder="0" step="0.1" oninput="calcVenda()" /></div>
+          <div class="form-group"><label>Arrobas</label><input type="text" id="vendaArroba" readonly placeholder="—" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Valor por @ (R$) *</label><input type="number" id="vendaPrecoArroba" placeholder="0.00" step="0.01" oninput="calcVenda()" /></div>
+          <div class="form-group"><label>Valor Total (R$)</label><input type="text" id="vendaTotal" readonly placeholder="—" /></div>
+        </div>
+        <div class="form-group"><label>Comprador</label><input type="text" id="vendaComprador" placeholder="Nome do comprador" /></div>
+        <div class="form-group"><label>Observações</label><textarea id="vendaObs" placeholder="Observações opcionais..."></textarea></div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="saveVenda()">Salvar</button>
+          <button class="btn btn-outline" onclick="closeModal('modalVenda')">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalCusto">
+    <div class="modal">
+      <div class="modal-header"><h2>Novo Custo</h2><button class="modal-close" onclick="closeModal('modalCusto')">✕</button></div>
+      <div class="modal-body">
+        <input type="hidden" id="custoId" />
+        <div class="form-row">
+          <div class="form-group"><label>Descrição *</label><input type="text" id="custoDescricao" placeholder="Ex: Vacina Aftosa" /></div>
+          <div class="form-group"><label>Categoria *</label><select id="custoCategoria"><option value="alimentacao">Alimentação</option><option value="saude">Saúde / Veterinário</option><option value="mao_de_obra">Mão de Obra</option><option value="infraestrutura">Infraestrutura</option><option value="transporte">Transporte</option><option value="outros">Outros</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Lote (opcional)</label><select id="custoLote"><option value="">Geral</option></select></div>
+          <div class="form-group"><label>Data *</label><input type="date" id="custoData" /></div>
+        </div>
+        <div class="form-group"><label>Valor (R$) *</label><input type="number" id="custoValor" placeholder="0.00" step="0.01" /></div>
+        <div class="form-group"><label>Observações</label><textarea id="custoObs" placeholder="Observações opcionais..."></textarea></div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="saveCusto()">Salvar</button>
+          <button class="btn btn-outline" onclick="closeModal('modalCusto')">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
