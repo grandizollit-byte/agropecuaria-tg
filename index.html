@@ -1,158 +1,161 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TG Agro Pro — Gestão Pecuária</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="dark">
 
-<!-- ═══════════════════════════════════════
-     MOBILE TOP BAR
-════════════════════════════════════════ -->
+<!-- ═══ MOBILE TOPBAR ═══ -->
 <div class="mobile-topbar">
-  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
   <div class="mobile-logo">
-    <div class="logo-mark">🐂</div>
-    <span>TG AGRO PRO</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+    <span>TG Agro Pro</span>
   </div>
-  <div class="mobile-spacer"></div>
+  <button class="theme-toggle" id="themeToggleMobile" onclick="toggleTheme()" aria-label="Alternar tema">
+    <span class="icon-sun">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </span>
+    <span class="icon-moon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </span>
+  </button>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SIDEBAR
-════════════════════════════════════════ -->
+<!-- ═══ SIDEBAR ═══ -->
 <aside class="sidebar" id="sidebar">
-
-  <!-- Brand -->
   <div class="sidebar-brand">
     <div class="brand-logo">
-      <span class="brand-icon">🐂</span>
+      <div class="brand-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
       <div class="brand-text">
         <div class="brand-name">TG Agro Pro</div>
         <div class="brand-tagline">Gestão Pecuária</div>
       </div>
     </div>
-    <button class="sidebar-close-mobile" onclick="closeMobileMenu()">✕</button>
+    <button class="sidebar-close-mobile" onclick="closeMobileMenu()" aria-label="Fechar menu">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
 
-  <!-- User chip -->
   <div class="sidebar-user">
     <div class="user-avatar">TG</div>
     <div class="user-info">
       <div class="user-name">Minha Fazenda</div>
-      <div class="user-plan">Pro · Ativo</div>
+      <div class="user-plan">
+        <span class="status-dot"></span>
+        Pro · Ativo
+      </div>
     </div>
-    <div class="user-dot"></div>
   </div>
 
-  <!-- Nav -->
   <nav class="nav-menu">
-    <div class="nav-section-label">Principal</div>
+    <div class="nav-group">
+      <span class="nav-section-label">Principal</span>
+      <a class="nav-link active" data-page="dashboard" onclick="navigate('dashboard')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </span>
+        <span class="nav-text">Dashboard</span>
+        <span class="nav-badge" id="nbDash"></span>
+      </a>
+    </div>
 
-    <a class="nav-link active" data-page="dashboard" onclick="navigate('dashboard')">
-      <span class="nav-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      </span>
-      <span class="nav-text">Dashboard</span>
-      <span class="nav-badge" id="nbDash"></span>
-    </a>
+    <div class="nav-group">
+      <span class="nav-section-label">Rebanho</span>
+      <a class="nav-link" data-page="lotes" onclick="navigate('lotes')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </span>
+        <span class="nav-text">Lotes</span>
+      </a>
+      <a class="nav-link" data-page="animais" onclick="navigate('animais')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </span>
+        <span class="nav-text">Animais</span>
+      </a>
+      <a class="nav-link" data-page="pesagens" onclick="navigate('pesagens')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </span>
+        <span class="nav-text">Pesagens</span>
+      </a>
+    </div>
 
-    <div class="nav-section-label" style="margin-top:8px">Rebanho</div>
-
-    <a class="nav-link" data-page="lotes" onclick="navigate('lotes')">
-      <span class="nav-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </span>
-      <span class="nav-text">Lotes</span>
-    </a>
-
-    <a class="nav-link" data-page="animais" onclick="navigate('animais')">
-      <span class="nav-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><circle cx="18" cy="9" r="2"/><circle cx="6" cy="9" r="2"/></svg>
-      </span>
-      <span class="nav-text">Animais</span>
-    </a>
-
-    <a class="nav-link" data-page="pesagens" onclick="navigate('pesagens')">
-      <span class="nav-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      </span>
-      <span class="nav-text">Pesagens</span>
-    </a>
-
-    <div class="nav-section-label" style="margin-top:8px">Financeiro</div>
-
-    <a class="nav-link" data-page="vendas" onclick="navigate('vendas')">
-      <span class="nav-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-      </span>
-      <span class="nav-text">Vendas</span>
-    </a>
-
-    <a class="nav-link" data-page="custos" onclick="navigate('custos')">
-      <span class="nav-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      </span>
-      <span class="nav-text">Custos</span>
-    </a>
-
-    <a class="nav-link" data-page="financeiro" onclick="navigate('financeiro')">
-      <span class="nav-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-      </span>
-      <span class="nav-text">Financeiro</span>
-    </a>
+    <div class="nav-group">
+      <span class="nav-section-label">Financeiro</span>
+      <a class="nav-link" data-page="vendas" onclick="navigate('vendas')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </span>
+        <span class="nav-text">Vendas</span>
+      </a>
+      <a class="nav-link" data-page="custos" onclick="navigate('custos')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </span>
+        <span class="nav-text">Custos</span>
+      </a>
+      <a class="nav-link" data-page="financeiro" onclick="navigate('financeiro')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </span>
+        <span class="nav-text">Financeiro</span>
+      </a>
+    </div>
   </nav>
 
-  <!-- Sidebar footer -->
   <div class="sidebar-footer">
     <div class="sidebar-divider"></div>
-    <div class="footer-info">
-      <span class="footer-version">v2.0 Pro</span>
-      <span class="footer-dot">·</span>
-      <span class="footer-copy">TG Agro</span>
-    </div>
+    <span class="footer-version">v2.0 Pro · TG Agro</span>
   </div>
 </aside>
 
-<!-- Mobile overlay -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileMenu()"></div>
 
-<!-- ═══════════════════════════════════════
-     MAIN
-════════════════════════════════════════ -->
+<!-- ═══ MAIN ═══ -->
 <main class="main-content" id="main">
 
-  <!-- Page Header -->
-  <div class="page-header" id="pageHeader">
+  <header class="page-header" id="pageHeader">
     <div class="page-header-left">
       <h1 class="page-heading" id="pageTitle">Dashboard</h1>
       <p class="page-subtitle" id="pageSubtitle">Visão geral do seu rebanho</p>
     </div>
     <div class="page-header-right">
       <div class="header-date" id="topbarDate"></div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Alternar tema">
+        <span class="icon-sun">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </span>
+        <span class="icon-moon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </span>
+      </button>
       <button class="btn-header-action" id="headerActionBtn"></button>
     </div>
-  </div>
+  </header>
 
-  <!-- Pages -->
   <div class="pages-container">
 
-    <!-- ══ DASHBOARD ══ -->
+    <!-- DASHBOARD -->
     <section id="page-dashboard" class="page active">
-
       <div class="cards-grid">
         <div class="kpi-card kpi-green">
           <div class="kpi-top">
             <div class="kpi-label">Total de Animais</div>
-            <div class="kpi-icon-wrap green"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+            <div class="kpi-icon-wrap green">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
           </div>
           <div class="kpi-value" id="dbAnimais">—</div>
           <div class="kpi-footer"><span class="kpi-tag green">Cadastrados</span></div>
@@ -161,7 +164,9 @@
         <div class="kpi-card kpi-amber">
           <div class="kpi-top">
             <div class="kpi-label">Lotes Ativos</div>
-            <div class="kpi-icon-wrap amber"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div class="kpi-icon-wrap amber">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            </div>
           </div>
           <div class="kpi-value" id="dbLotes">—</div>
           <div class="kpi-footer"><span class="kpi-tag amber">Em operação</span></div>
@@ -170,7 +175,9 @@
         <div class="kpi-card kpi-blue">
           <div class="kpi-top">
             <div class="kpi-label">Receita Total</div>
-            <div class="kpi-icon-wrap blue"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+            <div class="kpi-icon-wrap blue">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
           </div>
           <div class="kpi-value" id="dbReceita">—</div>
           <div class="kpi-footer"><span class="kpi-tag blue">Em vendas</span></div>
@@ -179,7 +186,9 @@
         <div class="kpi-card kpi-red">
           <div class="kpi-top">
             <div class="kpi-label">Custos Totais</div>
-            <div class="kpi-icon-wrap red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div class="kpi-icon-wrap red">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
           </div>
           <div class="kpi-value" id="dbCustos">—</div>
           <div class="kpi-footer"><span class="kpi-tag red">Despesas</span></div>
@@ -188,7 +197,9 @@
         <div class="kpi-card kpi-purple">
           <div class="kpi-top">
             <div class="kpi-label">Lucro Líquido</div>
-            <div class="kpi-icon-wrap purple"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+            <div class="kpi-icon-wrap purple">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+            </div>
           </div>
           <div class="kpi-value" id="dbLucro">—</div>
           <div class="kpi-footer"><span class="kpi-tag purple">Receita - Custos</span></div>
@@ -197,7 +208,9 @@
         <div class="kpi-card kpi-teal">
           <div class="kpi-top">
             <div class="kpi-label">Peso do Rebanho</div>
-            <div class="kpi-icon-wrap teal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <div class="kpi-icon-wrap teal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
           </div>
           <div class="kpi-value" id="dbPeso">—</div>
           <div class="kpi-footer"><span class="kpi-tag teal">Peso total</span></div>
@@ -210,43 +223,33 @@
       </div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr>
-              <th>Lote</th><th>Raça</th><th>Animais</th><th>Peso Médio</th><th>@ Médias</th><th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="dbLotesTbody">
-            <tr><td colspan="6" class="td-empty">Nenhum lote cadastrado.</td></tr>
-          </tbody>
+          <thead><tr><th>Lote</th><th>Raça</th><th>Animais</th><th>Peso Médio</th><th>@ Médias</th><th>Status</th></tr></thead>
+          <tbody id="dbLotesTbody"><tr><td colspan="6" class="td-empty">Nenhum lote cadastrado.</td></tr></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ══ LOTES ══ -->
+    <!-- LOTES -->
     <section id="page-lotes" class="page">
       <div class="toolbar">
         <button class="btn btn-primary" onclick="abrirModalLote()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Novo Lote
         </button>
       </div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Nome</th><th>Raça</th><th>Finalidade</th><th>Área (ha)</th><th>Entrada</th><th>Status</th><th>Ações</th></tr>
-          </thead>
-          <tbody id="lotesTbody">
-            <tr><td colspan="7" class="td-empty">Nenhum lote cadastrado.</td></tr>
-          </tbody>
+          <thead><tr><th>Nome</th><th>Raça</th><th>Finalidade</th><th>Área (ha)</th><th>Entrada</th><th>Status</th><th>Ações</th></tr></thead>
+          <tbody id="lotesTbody"><tr><td colspan="7" class="td-empty">Nenhum lote cadastrado.</td></tr></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ══ ANIMAIS ══ -->
+    <!-- ANIMAIS -->
     <section id="page-animais" class="page">
       <div class="toolbar">
         <button class="btn btn-primary" onclick="abrirModalAnimal()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Novo Animal
         </button>
         <select class="sel-filtro" id="filtroLoteAnimal" onchange="renderAnimais()">
@@ -255,21 +258,17 @@
       </div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Brinco</th><th>Lote</th><th>Raça</th><th>Sexo</th><th>Peso Entrada</th><th>@ Entrada</th><th>Valor Compra</th><th>Ações</th></tr>
-          </thead>
-          <tbody id="animaisTbody">
-            <tr><td colspan="8" class="td-empty">Nenhum animal cadastrado.</td></tr>
-          </tbody>
+          <thead><tr><th>Brinco</th><th>Lote</th><th>Raça</th><th>Sexo</th><th>Peso Entrada</th><th>@ Entrada</th><th>Valor Compra</th><th>Ações</th></tr></thead>
+          <tbody id="animaisTbody"><tr><td colspan="8" class="td-empty">Nenhum animal cadastrado.</td></tr></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ══ PESAGENS ══ -->
+    <!-- PESAGENS -->
     <section id="page-pesagens" class="page">
       <div class="toolbar">
         <button class="btn btn-primary" onclick="abrirModalPesagem()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Nova Pesagem
         </button>
         <select class="sel-filtro" id="filtroLotePes" onchange="renderPesagens()">
@@ -278,41 +277,33 @@
       </div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Brinco</th><th>Lote</th><th>Data</th><th>Peso (kg)</th><th>Arrobas (@)</th><th>GMD</th><th>Ações</th></tr>
-          </thead>
-          <tbody id="pesagensTbody">
-            <tr><td colspan="7" class="td-empty">Nenhuma pesagem registrada.</td></tr>
-          </tbody>
+          <thead><tr><th>Brinco</th><th>Lote</th><th>Data</th><th>Peso (kg)</th><th>Arrobas (@)</th><th>GMD</th><th>Ações</th></tr></thead>
+          <tbody id="pesagensTbody"><tr><td colspan="7" class="td-empty">Nenhuma pesagem registrada.</td></tr></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ══ VENDAS ══ -->
+    <!-- VENDAS -->
     <section id="page-vendas" class="page">
       <div class="toolbar">
         <button class="btn btn-primary" onclick="abrirModalVenda()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Nova Venda
         </button>
       </div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Data</th><th>Brinco</th><th>Lote</th><th>Peso (kg)</th><th>Arrobas</th><th>R$/@</th><th>Total</th><th>Comprador</th><th>Ações</th></tr>
-          </thead>
-          <tbody id="vendasTbody">
-            <tr><td colspan="9" class="td-empty">Nenhuma venda registrada.</td></tr>
-          </tbody>
+          <thead><tr><th>Data</th><th>Brinco</th><th>Lote</th><th>Peso (kg)</th><th>Arrobas</th><th>R$/@</th><th>Total</th><th>Comprador</th><th>Ações</th></tr></thead>
+          <tbody id="vendasTbody"><tr><td colspan="9" class="td-empty">Nenhuma venda registrada.</td></tr></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ══ CUSTOS ══ -->
+    <!-- CUSTOS -->
     <section id="page-custos" class="page">
       <div class="toolbar">
         <button class="btn btn-primary" onclick="abrirModalCusto()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Novo Custo
         </button>
         <select class="sel-filtro" id="filtroCat" onchange="renderCustos()">
@@ -327,46 +318,34 @@
       </div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Lote</th><th>Valor (R$)</th><th>Ações</th></tr>
-          </thead>
-          <tbody id="custosTbody">
-            <tr><td colspan="6" class="td-empty">Nenhum custo registrado.</td></tr>
-          </tbody>
+          <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Lote</th><th>Valor (R$)</th><th>Ações</th></tr></thead>
+          <tbody id="custosTbody"><tr><td colspan="6" class="td-empty">Nenhum custo registrado.</td></tr></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ══ FINANCEIRO ══ -->
+    <!-- FINANCEIRO -->
     <section id="page-financeiro" class="page">
       <div class="fin-kpi-row">
         <div class="fin-kpi-card">
           <div class="fin-kpi-label">Total Receitas</div>
           <div class="fin-kpi-value green" id="finRec">R$ 0,00</div>
-          <div class="fin-kpi-icon green">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
-          </div>
+          <div class="fin-kpi-icon green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div>
         </div>
         <div class="fin-kpi-card">
           <div class="fin-kpi-label">Total Custos</div>
           <div class="fin-kpi-value red" id="finCst">R$ 0,00</div>
-          <div class="fin-kpi-icon red">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg>
-          </div>
+          <div class="fin-kpi-icon red"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg></div>
         </div>
         <div class="fin-kpi-card">
           <div class="fin-kpi-label">Lucro Líquido</div>
           <div class="fin-kpi-value purple" id="finLuc">R$ 0,00</div>
-          <div class="fin-kpi-icon purple">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-          </div>
+          <div class="fin-kpi-icon purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
         </div>
         <div class="fin-kpi-card">
           <div class="fin-kpi-label">Margem</div>
           <div class="fin-kpi-value blue" id="finMrg">0%</div>
-          <div class="fin-kpi-icon blue">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
+          <div class="fin-kpi-icon blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         </div>
       </div>
 
@@ -376,12 +355,8 @@
       </div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Lote</th><th>Receitas</th><th>Custos</th><th>Lucro</th><th>Margem</th></tr>
-          </thead>
-          <tbody id="finLotesTbody">
-            <tr><td colspan="5" class="td-empty">Carregando...</td></tr>
-          </tbody>
+          <thead><tr><th>Lote</th><th>Receitas</th><th>Custos</th><th>Lucro</th><th>Margem</th></tr></thead>
+          <tbody id="finLotesTbody"><tr><td colspan="5" class="td-empty">Carregando...</td></tr></tbody>
         </table>
       </div>
 
@@ -391,33 +366,29 @@
       </div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Categoria</th><th>Valor (R$)</th><th>Participação</th></tr>
-          </thead>
-          <tbody id="finCatTbody">
-            <tr><td colspan="3" class="td-empty">Sem custos registrados.</td></tr>
-          </tbody>
+          <thead><tr><th>Categoria</th><th>Valor (R$)</th><th>Participação</th></tr></thead>
+          <tbody id="finCatTbody"><tr><td colspan="3" class="td-empty">Sem custos registrados.</td></tr></tbody>
         </table>
       </div>
     </section>
 
-  </div><!-- /pages-container -->
+  </div>
 </main>
 
-<!-- ═══════════════════════════════════════
-     MODALS
-════════════════════════════════════════ -->
+<!-- ═══ MODALS ═══ -->
 
 <!-- Modal Lote -->
 <div class="modal-backdrop" id="mLote">
   <div class="modal-box">
     <div class="modal-hdr">
       <div class="modal-hdr-left">
-        <div class="modal-icon green">🏠</div>
+        <div class="modal-icon green">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
         <h3 class="modal-title" id="mLoteTitle">Novo Lote</h3>
       </div>
       <button class="modal-x" onclick="fechar('mLote')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
@@ -468,7 +439,7 @@
     <div class="modal-ftr">
       <button class="btn btn-ghost" onclick="fechar('mLote')">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarLote()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         Salvar Lote
       </button>
     </div>
@@ -480,11 +451,13 @@
   <div class="modal-box">
     <div class="modal-hdr">
       <div class="modal-hdr-left">
-        <div class="modal-icon teal">🐄</div>
+        <div class="modal-icon teal">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
         <h3 class="modal-title" id="mAnimalTitle">Novo Animal</h3>
       </div>
       <button class="modal-x" onclick="fechar('mAnimal')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
@@ -519,7 +492,7 @@
         </div>
         <div class="form-field">
           <label class="field-label">Arrobas Entrada</label>
-          <input class="field-input readonly" type="text" id="aArroba" readonly placeholder="Calculado auto"/>
+          <input class="field-input readonly" type="text" id="aArroba" readonly placeholder="Auto"/>
         </div>
       </div>
       <div class="form-row-2">
@@ -540,7 +513,7 @@
     <div class="modal-ftr">
       <button class="btn btn-ghost" onclick="fechar('mAnimal')">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarAnimal()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         Salvar Animal
       </button>
     </div>
@@ -552,11 +525,13 @@
   <div class="modal-box modal-sm">
     <div class="modal-hdr">
       <div class="modal-hdr-left">
-        <div class="modal-icon blue">⚖️</div>
+        <div class="modal-icon blue">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
         <h3 class="modal-title">Nova Pesagem</h3>
       </div>
       <button class="modal-x" onclick="fechar('mPesagem')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
@@ -578,7 +553,7 @@
         </div>
         <div class="form-field">
           <label class="field-label">Arrobas</label>
-          <input class="field-input readonly" type="text" id="pArroba" readonly placeholder="Calculado auto"/>
+          <input class="field-input readonly" type="text" id="pArroba" readonly placeholder="Auto"/>
         </div>
       </div>
       <div class="form-field">
@@ -589,7 +564,7 @@
     <div class="modal-ftr">
       <button class="btn btn-ghost" onclick="fechar('mPesagem')">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarPesagem()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         Registrar Pesagem
       </button>
     </div>
@@ -601,11 +576,13 @@
   <div class="modal-box">
     <div class="modal-hdr">
       <div class="modal-hdr-left">
-        <div class="modal-icon green">💰</div>
+        <div class="modal-icon green">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
         <h3 class="modal-title">Nova Venda</h3>
       </div>
       <button class="modal-x" onclick="fechar('mVenda')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
@@ -627,17 +604,17 @@
         </div>
         <div class="form-field">
           <label class="field-label">Arrobas</label>
-          <input class="field-input readonly" type="text" id="vArroba" readonly placeholder="Calculado auto"/>
+          <input class="field-input readonly" type="text" id="vArroba" readonly placeholder="Auto"/>
         </div>
       </div>
       <div class="form-row-2">
         <div class="form-field">
-          <label class="field-label">Preço por Arroba (R$/@) <span class="required">*</span></label>
+          <label class="field-label">Preço por @ (R$) <span class="required">*</span></label>
           <input class="field-input" type="number" id="vPreco" step="0.01" placeholder="0,00" oninput="calcVenda()"/>
         </div>
         <div class="form-field">
           <label class="field-label">Valor Total (R$)</label>
-          <input class="field-input readonly highlight" type="text" id="vTotal" readonly placeholder="Calculado auto"/>
+          <input class="field-input readonly highlight" type="text" id="vTotal" readonly placeholder="Auto"/>
         </div>
       </div>
       <div class="form-field">
@@ -652,7 +629,7 @@
     <div class="modal-ftr">
       <button class="btn btn-ghost" onclick="fechar('mVenda')">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarVenda()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         Registrar Venda
       </button>
     </div>
@@ -664,11 +641,13 @@
   <div class="modal-box">
     <div class="modal-hdr">
       <div class="modal-hdr-left">
-        <div class="modal-icon red">📋</div>
+        <div class="modal-icon red">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
         <h3 class="modal-title">Novo Custo</h3>
       </div>
       <button class="modal-x" onclick="fechar('mCusto')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
@@ -714,47 +693,59 @@
     <div class="modal-ftr">
       <button class="btn btn-ghost" onclick="fechar('mCusto')">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarCusto()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         Registrar Custo
       </button>
     </div>
   </div>
 </div>
 
-<!-- ── Toast ── -->
 <div class="toast-container" id="toast"></div>
 
 <script src="app.js"></script>
-
 <script>
-// Mobile menu
-function toggleMobileMenu(){
+/* ── Mobile Menu ── */
+function toggleMobileMenu() {
   document.getElementById('sidebar').classList.toggle('mobile-open');
   document.getElementById('sidebarOverlay').classList.toggle('active');
 }
-function closeMobileMenu(){
+function closeMobileMenu() {
   document.getElementById('sidebar').classList.remove('mobile-open');
   document.getElementById('sidebarOverlay').classList.remove('active');
 }
 
-// Override navigate to update subtitle too
+/* ── Theme Toggle ── */
+function toggleTheme() {
+  const isDark = document.body.classList.contains('dark');
+  document.body.classList.toggle('dark', !isDark);
+  document.body.classList.toggle('light', isDark);
+  document.documentElement.classList.toggle('dark', !isDark);
+  document.documentElement.classList.toggle('light', isDark);
+  localStorage.setItem('tga_theme', isDark ? 'light' : 'dark');
+}
+(function() {
+  const saved = localStorage.getItem('tga_theme') || 'dark';
+  document.body.className = saved;
+  document.documentElement.className = saved;
+})();
+
+/* ── Page subtitles ── */
 const _origNavigate = window.navigate;
 const PAGE_SUBTITLES = {
-  dashboard:'Visão geral do seu rebanho',
-  lotes:'Gerencie seus lotes de pastagem',
-  animais:'Cadastro e controle do rebanho',
-  pesagens:'Histórico de pesagens e GMD',
-  vendas:'Registro de comercializações',
-  custos:'Controle de despesas e gastos',
-  financeiro:'Análise financeira completa'
+  dashboard: 'Visão geral do seu rebanho',
+  lotes: 'Gerencie seus lotes de pastagem',
+  animais: 'Cadastro e controle do rebanho',
+  pesagens: 'Histórico de pesagens e GMD',
+  vendas: 'Registro de comercializações',
+  custos: 'Controle de despesas e gastos',
+  financeiro: 'Análise financeira completa'
 };
-window.navigate = function(pg){
-  if(_origNavigate) _origNavigate(pg);
+window.navigate = function(pg) {
+  if (_origNavigate) _origNavigate(pg);
   const sub = document.getElementById('pageSubtitle');
-  if(sub) sub.textContent = PAGE_SUBTITLES[pg]||'';
+  if (sub) sub.textContent = PAGE_SUBTITLES[pg] || '';
   closeMobileMenu();
 };
 </script>
-
 </body>
 </html>
