@@ -1,319 +1,760 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TG Agro Pro</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TG Agro Pro — Gestão Pecuária</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo">
-        <span class="logo-icon">🐂</span>
-        <div>
-          <div class="logo-title">TG AGRO PRO</div>
-          <div class="logo-sub">Gestão Pecuária</div>
-        </div>
+
+<!-- ═══════════════════════════════════════
+     MOBILE TOP BAR
+════════════════════════════════════════ -->
+<div class="mobile-topbar">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-logo">
+    <div class="logo-mark">🐂</div>
+    <span>TG AGRO PRO</span>
+  </div>
+  <div class="mobile-spacer"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+
+  <!-- Brand -->
+  <div class="sidebar-brand">
+    <div class="brand-logo">
+      <span class="brand-icon">🐂</span>
+      <div class="brand-text">
+        <div class="brand-name">TG Agro Pro</div>
+        <div class="brand-tagline">Gestão Pecuária</div>
       </div>
     </div>
-    <nav class="nav">
-      <a class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></a>
-      <a class="nav-item" data-page="lotes" onclick="navigate('lotes')"><span class="nav-icon">🏠</span><span class="nav-label">Lotes</span></a>
-      <a class="nav-item" data-page="animais" onclick="navigate('animais')"><span class="nav-icon">🐄</span><span class="nav-label">Animais</span></a>
-      <a class="nav-item" data-page="pesagens" onclick="navigate('pesagens')"><span class="nav-icon">⚖️</span><span class="nav-label">Pesagens</span></a>
-      <a class="nav-item" data-page="vendas" onclick="navigate('vendas')"><span class="nav-icon">💰</span><span class="nav-label">Vendas</span></a>
-      <a class="nav-item" data-page="custos" onclick="navigate('custos')"><span class="nav-icon">📋</span><span class="nav-label">Custos</span></a>
-      <a class="nav-item" data-page="financeiro" onclick="navigate('financeiro')"><span class="nav-icon">📈</span><span class="nav-label">Financeiro</span></a>
-    </nav>
-    <div class="sidebar-footer">
-      <button class="btn-setup" onclick="openSetup()">⚙️ Configurar BD</button>
+    <button class="sidebar-close-mobile" onclick="closeMobileMenu()">✕</button>
+  </div>
+
+  <!-- User chip -->
+  <div class="sidebar-user">
+    <div class="user-avatar">TG</div>
+    <div class="user-info">
+      <div class="user-name">Minha Fazenda</div>
+      <div class="user-plan">Pro · Ativo</div>
     </div>
-  </aside>
+    <div class="user-dot"></div>
+  </div>
 
-  <main class="main" id="main">
-    <header class="topbar">
-      <div class="topbar-left">
-        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+  <!-- Nav -->
+  <nav class="nav-menu">
+    <div class="nav-section-label">Principal</div>
+
+    <a class="nav-link active" data-page="dashboard" onclick="navigate('dashboard')">
+      <span class="nav-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </span>
+      <span class="nav-text">Dashboard</span>
+      <span class="nav-badge" id="nbDash"></span>
+    </a>
+
+    <div class="nav-section-label" style="margin-top:8px">Rebanho</div>
+
+    <a class="nav-link" data-page="lotes" onclick="navigate('lotes')">
+      <span class="nav-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </span>
+      <span class="nav-text">Lotes</span>
+    </a>
+
+    <a class="nav-link" data-page="animais" onclick="navigate('animais')">
+      <span class="nav-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><circle cx="18" cy="9" r="2"/><circle cx="6" cy="9" r="2"/></svg>
+      </span>
+      <span class="nav-text">Animais</span>
+    </a>
+
+    <a class="nav-link" data-page="pesagens" onclick="navigate('pesagens')">
+      <span class="nav-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </span>
+      <span class="nav-text">Pesagens</span>
+    </a>
+
+    <div class="nav-section-label" style="margin-top:8px">Financeiro</div>
+
+    <a class="nav-link" data-page="vendas" onclick="navigate('vendas')">
+      <span class="nav-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </span>
+      <span class="nav-text">Vendas</span>
+    </a>
+
+    <a class="nav-link" data-page="custos" onclick="navigate('custos')">
+      <span class="nav-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </span>
+      <span class="nav-text">Custos</span>
+    </a>
+
+    <a class="nav-link" data-page="financeiro" onclick="navigate('financeiro')">
+      <span class="nav-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </span>
+      <span class="nav-text">Financeiro</span>
+    </a>
+  </nav>
+
+  <!-- Sidebar footer -->
+  <div class="sidebar-footer">
+    <div class="sidebar-divider"></div>
+    <div class="footer-info">
+      <span class="footer-version">v2.0 Pro</span>
+      <span class="footer-dot">·</span>
+      <span class="footer-copy">TG Agro</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Mobile overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileMenu()"></div>
+
+<!-- ═══════════════════════════════════════
+     MAIN
+════════════════════════════════════════ -->
+<main class="main-content" id="main">
+
+  <!-- Page Header -->
+  <div class="page-header" id="pageHeader">
+    <div class="page-header-left">
+      <h1 class="page-heading" id="pageTitle">Dashboard</h1>
+      <p class="page-subtitle" id="pageSubtitle">Visão geral do seu rebanho</p>
+    </div>
+    <div class="page-header-right">
+      <div class="header-date" id="topbarDate"></div>
+      <button class="btn-header-action" id="headerActionBtn"></button>
+    </div>
+  </div>
+
+  <!-- Pages -->
+  <div class="pages-container">
+
+    <!-- ══ DASHBOARD ══ -->
+    <section id="page-dashboard" class="page active">
+
+      <div class="cards-grid">
+        <div class="kpi-card kpi-green">
+          <div class="kpi-top">
+            <div class="kpi-label">Total de Animais</div>
+            <div class="kpi-icon-wrap green"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          </div>
+          <div class="kpi-value" id="dbAnimais">—</div>
+          <div class="kpi-footer"><span class="kpi-tag green">Cadastrados</span></div>
+        </div>
+
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-top">
+            <div class="kpi-label">Lotes Ativos</div>
+            <div class="kpi-icon-wrap amber"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          </div>
+          <div class="kpi-value" id="dbLotes">—</div>
+          <div class="kpi-footer"><span class="kpi-tag amber">Em operação</span></div>
+        </div>
+
+        <div class="kpi-card kpi-blue">
+          <div class="kpi-top">
+            <div class="kpi-label">Receita Total</div>
+            <div class="kpi-icon-wrap blue"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          </div>
+          <div class="kpi-value" id="dbReceita">—</div>
+          <div class="kpi-footer"><span class="kpi-tag blue">Em vendas</span></div>
+        </div>
+
+        <div class="kpi-card kpi-red">
+          <div class="kpi-top">
+            <div class="kpi-label">Custos Totais</div>
+            <div class="kpi-icon-wrap red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          </div>
+          <div class="kpi-value" id="dbCustos">—</div>
+          <div class="kpi-footer"><span class="kpi-tag red">Despesas</span></div>
+        </div>
+
+        <div class="kpi-card kpi-purple">
+          <div class="kpi-top">
+            <div class="kpi-label">Lucro Líquido</div>
+            <div class="kpi-icon-wrap purple"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          </div>
+          <div class="kpi-value" id="dbLucro">—</div>
+          <div class="kpi-footer"><span class="kpi-tag purple">Receita - Custos</span></div>
+        </div>
+
+        <div class="kpi-card kpi-teal">
+          <div class="kpi-top">
+            <div class="kpi-label">Peso do Rebanho</div>
+            <div class="kpi-icon-wrap teal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          </div>
+          <div class="kpi-value" id="dbPeso">—</div>
+          <div class="kpi-footer"><span class="kpi-tag teal">Peso total</span></div>
+        </div>
       </div>
-      <div class="topbar-right">
-        <span class="topbar-date" id="topbarDate"></span>
+
+      <div class="section-header">
+        <h2 class="section-title">Resumo por Lote</h2>
+        <span class="section-line"></span>
       </div>
-    </header>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Lote</th><th>Raça</th><th>Animais</th><th>Peso Médio</th><th>@ Médias</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="dbLotesTbody">
+            <tr><td colspan="6" class="td-empty">Nenhum lote cadastrado.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-    <div class="content">
+    <!-- ══ LOTES ══ -->
+    <section id="page-lotes" class="page">
+      <div class="toolbar">
+        <button class="btn btn-primary" onclick="abrirModalLote()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Novo Lote
+        </button>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Nome</th><th>Raça</th><th>Finalidade</th><th>Área (ha)</th><th>Entrada</th><th>Status</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="lotesTbody">
+            <tr><td colspan="7" class="td-empty">Nenhum lote cadastrado.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-      <!-- DASHBOARD -->
-      <section id="page-dashboard" class="page active">
-        <div class="cards-grid">
-          <div class="card card-green"><div class="card-label">Total de Animais</div><div class="card-value" id="totalAnimais">—</div><div class="card-sub">em todos os lotes</div></div>
-          <div class="card card-amber"><div class="card-label">Peso Total (kg)</div><div class="card-value" id="pesoTotal">—</div><div class="card-sub">última pesagem</div></div>
-          <div class="card card-blue"><div class="card-label">Receita Total</div><div class="card-value" id="receitaTotal">—</div><div class="card-sub">em vendas</div></div>
-          <div class="card card-red"><div class="card-label">Custos Totais</div><div class="card-value" id="custosTotal">—</div><div class="card-sub">despesas gerais</div></div>
-          <div class="card card-purple"><div class="card-label">Lucro Líquido</div><div class="card-value" id="lucroTotal">—</div><div class="card-sub">receita - custos</div></div>
-          <div class="card card-teal"><div class="card-label">Lotes Ativos</div><div class="card-value" id="lotesAtivos">—</div><div class="card-sub">em operação</div></div>
-        </div>
-        <div class="section-title">Resumo por Lote</div>
-        <div class="table-wrap">
-          <table class="table" id="dashLotesTable">
-            <thead><tr><th>Lote</th><th>Animais</th><th>Peso Médio (kg)</th><th>@ Médias</th><th>GMD (kg/dia)</th><th>Status</th></tr></thead>
-            <tbody id="dashLotesTbody"><tr><td colspan="6" class="empty">Carregando...</td></tr></tbody>
-          </table>
-        </div>
-      </section>
+    <!-- ══ ANIMAIS ══ -->
+    <section id="page-animais" class="page">
+      <div class="toolbar">
+        <button class="btn btn-primary" onclick="abrirModalAnimal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Novo Animal
+        </button>
+        <select class="sel-filtro" id="filtroLoteAnimal" onchange="renderAnimais()">
+          <option value="">Todos os lotes</option>
+        </select>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Brinco</th><th>Lote</th><th>Raça</th><th>Sexo</th><th>Peso Entrada</th><th>@ Entrada</th><th>Valor Compra</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="animaisTbody">
+            <tr><td colspan="8" class="td-empty">Nenhum animal cadastrado.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-      <!-- LOTES -->
-      <section id="page-lotes" class="page">
-        <div class="toolbar">
-          <button class="btn btn-primary" onclick="openModal('modalLote'); document.getElementById('loteId').value=''; document.getElementById('modalLoteTitle').textContent='Novo Lote'">+ Novo Lote</button>
-        </div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Nome</th><th>Raça</th><th>Finalidade</th><th>Data Entrada</th><th>Área (ha)</th><th>Status</th><th>Ações</th></tr></thead>
-            <tbody id="lotesTbody"><tr><td colspan="7" class="empty">Nenhum lote cadastrado.</td></tr></tbody>
-          </table>
-        </div>
-      </section>
+    <!-- ══ PESAGENS ══ -->
+    <section id="page-pesagens" class="page">
+      <div class="toolbar">
+        <button class="btn btn-primary" onclick="abrirModalPesagem()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nova Pesagem
+        </button>
+        <select class="sel-filtro" id="filtroLotePes" onchange="renderPesagens()">
+          <option value="">Todos os lotes</option>
+        </select>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Brinco</th><th>Lote</th><th>Data</th><th>Peso (kg)</th><th>Arrobas (@)</th><th>GMD</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="pesagensTbody">
+            <tr><td colspan="7" class="td-empty">Nenhuma pesagem registrada.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-      <!-- ANIMAIS -->
-      <section id="page-animais" class="page">
-        <div class="toolbar">
-          <button class="btn btn-primary" onclick="openModalAnimal()">+ Novo Animal</button>
-          <select class="select-filter" id="filtroLoteAnimal" onchange="loadAnimais()"><option value="">Todos os lotes</option></select>
-        </div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Brinco</th><th>Lote</th><th>Raça</th><th>Sexo</th><th>Peso Entrada (kg)</th><th>@ Entrada</th><th>Data Entrada</th><th>Valor Compra</th><th>Ações</th></tr></thead>
-            <tbody id="animaisTbody"><tr><td colspan="9" class="empty">Nenhum animal cadastrado.</td></tr></tbody>
-          </table>
-        </div>
-      </section>
+    <!-- ══ VENDAS ══ -->
+    <section id="page-vendas" class="page">
+      <div class="toolbar">
+        <button class="btn btn-primary" onclick="abrirModalVenda()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nova Venda
+        </button>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Data</th><th>Brinco</th><th>Lote</th><th>Peso (kg)</th><th>Arrobas</th><th>R$/@</th><th>Total</th><th>Comprador</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="vendasTbody">
+            <tr><td colspan="9" class="td-empty">Nenhuma venda registrada.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-      <!-- PESAGENS -->
-      <section id="page-pesagens" class="page">
-        <div class="toolbar">
-          <button class="btn btn-primary" onclick="openModalPesagem()">+ Nova Pesagem</button>
-          <select class="select-filter" id="filtroLotePesagem" onchange="loadPesagens()"><option value="">Todos os lotes</option></select>
-        </div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Brinco</th><th>Lote</th><th>Data</th><th>Peso (kg)</th><th>Arrobas (@)</th><th>GMD (kg/dia)</th><th>Ações</th></tr></thead>
-            <tbody id="pesagensTbody"><tr><td colspan="7" class="empty">Nenhuma pesagem registrada.</td></tr></tbody>
-          </table>
-        </div>
-      </section>
+    <!-- ══ CUSTOS ══ -->
+    <section id="page-custos" class="page">
+      <div class="toolbar">
+        <button class="btn btn-primary" onclick="abrirModalCusto()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Novo Custo
+        </button>
+        <select class="sel-filtro" id="filtroCat" onchange="renderCustos()">
+          <option value="">Todas categorias</option>
+          <option value="alimentacao">🌾 Alimentação</option>
+          <option value="saude">💉 Saúde/Veterinário</option>
+          <option value="mao_de_obra">👷 Mão de Obra</option>
+          <option value="infraestrutura">🏗️ Infraestrutura</option>
+          <option value="transporte">🚛 Transporte</option>
+          <option value="outros">📦 Outros</option>
+        </select>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Lote</th><th>Valor (R$)</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="custosTbody">
+            <tr><td colspan="6" class="td-empty">Nenhum custo registrado.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-      <!-- VENDAS -->
-      <section id="page-vendas" class="page">
-        <div class="toolbar">
-          <button class="btn btn-primary" onclick="openModalVenda()">+ Nova Venda</button>
+    <!-- ══ FINANCEIRO ══ -->
+    <section id="page-financeiro" class="page">
+      <div class="fin-kpi-row">
+        <div class="fin-kpi-card">
+          <div class="fin-kpi-label">Total Receitas</div>
+          <div class="fin-kpi-value green" id="finRec">R$ 0,00</div>
+          <div class="fin-kpi-icon green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+          </div>
         </div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Data</th><th>Brinco</th><th>Lote</th><th>Peso (kg)</th><th>Arrobas</th><th>R$/@</th><th>Valor Total</th><th>Comprador</th><th>Ações</th></tr></thead>
-            <tbody id="vendasTbody"><tr><td colspan="9" class="empty">Nenhuma venda registrada.</td></tr></tbody>
-          </table>
+        <div class="fin-kpi-card">
+          <div class="fin-kpi-label">Total Custos</div>
+          <div class="fin-kpi-value red" id="finCst">R$ 0,00</div>
+          <div class="fin-kpi-icon red">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg>
+          </div>
         </div>
-      </section>
+        <div class="fin-kpi-card">
+          <div class="fin-kpi-label">Lucro Líquido</div>
+          <div class="fin-kpi-value purple" id="finLuc">R$ 0,00</div>
+          <div class="fin-kpi-icon purple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+        </div>
+        <div class="fin-kpi-card">
+          <div class="fin-kpi-label">Margem</div>
+          <div class="fin-kpi-value blue" id="finMrg">0%</div>
+          <div class="fin-kpi-icon blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+        </div>
+      </div>
 
-      <!-- CUSTOS -->
-      <section id="page-custos" class="page">
-        <div class="toolbar">
-          <button class="btn btn-primary" onclick="openModalCusto()">+ Novo Custo</button>
-          <select class="select-filter" id="filtroCategoriaCusto" onchange="loadCustos()">
-            <option value="">Todas categorias</option>
-            <option value="alimentacao">Alimentação</option>
-            <option value="saude">Saúde / Veterinário</option>
-            <option value="mao_de_obra">Mão de Obra</option>
-            <option value="infraestrutura">Infraestrutura</option>
-            <option value="transporte">Transporte</option>
-            <option value="outros">Outros</option>
+      <div class="section-header">
+        <h2 class="section-title">Resultado por Lote</h2>
+        <span class="section-line"></span>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Lote</th><th>Receitas</th><th>Custos</th><th>Lucro</th><th>Margem</th></tr>
+          </thead>
+          <tbody id="finLotesTbody">
+            <tr><td colspan="5" class="td-empty">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-header" style="margin-top:32px">
+        <h2 class="section-title">Custos por Categoria</h2>
+        <span class="section-line"></span>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Categoria</th><th>Valor (R$)</th><th>Participação</th></tr>
+          </thead>
+          <tbody id="finCatTbody">
+            <tr><td colspan="3" class="td-empty">Sem custos registrados.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div><!-- /pages-container -->
+</main>
+
+<!-- ═══════════════════════════════════════
+     MODALS
+════════════════════════════════════════ -->
+
+<!-- Modal Lote -->
+<div class="modal-backdrop" id="mLote">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-hdr-left">
+        <div class="modal-icon green">🏠</div>
+        <h3 class="modal-title" id="mLoteTitle">Novo Lote</h3>
+      </div>
+      <button class="modal-x" onclick="fechar('mLote')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="loteId"/>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Nome do Lote <span class="required">*</span></label>
+          <input class="field-input" type="text" id="loteNome" placeholder="Ex: Lote A — Nelore 2024"/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Raça</label>
+          <input class="field-input" type="text" id="loteRaca" placeholder="Nelore, Angus, Brahman..."/>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Finalidade</label>
+          <select class="field-select" id="loteFin">
+            <option value="corte">🥩 Corte</option>
+            <option value="leite">🥛 Leite</option>
+            <option value="recria">🌱 Recria</option>
+            <option value="cria">🐄 Cria</option>
           </select>
         </div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Lote</th><th>Valor (R$)</th><th>Ações</th></tr></thead>
-            <tbody id="custosTbody"><tr><td colspan="6" class="empty">Nenhum custo registrado.</td></tr></tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- FINANCEIRO -->
-      <section id="page-financeiro" class="page">
-        <div class="fin-grid">
-          <div class="fin-card"><div class="fin-label">Total Receitas</div><div class="fin-value green" id="finReceitas">R$ 0,00</div></div>
-          <div class="fin-card"><div class="fin-label">Total Custos</div><div class="fin-value red" id="finCustos">R$ 0,00</div></div>
-          <div class="fin-card"><div class="fin-label">Lucro Líquido</div><div class="fin-value" id="finLucro">R$ 0,00</div></div>
-          <div class="fin-card"><div class="fin-label">Margem</div><div class="fin-value" id="finMargem">0%</div></div>
-        </div>
-        <div class="section-title">Extrato por Lote</div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Lote</th><th>Receitas</th><th>Custos</th><th>Lucro</th><th>Margem</th></tr></thead>
-            <tbody id="finLotesTbody"><tr><td colspan="5" class="empty">Carregando...</td></tr></tbody>
-          </table>
-        </div>
-        <div class="section-title">Custos por Categoria</div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Categoria</th><th>Total (R$)</th><th>%</th></tr></thead>
-            <tbody id="finCategoriasTbody"><tr><td colspan="3" class="empty">Carregando...</td></tr></tbody>
-          </table>
-        </div>
-      </section>
-
-    </div>
-  </main>
-
-  <!-- MODALS -->
-  <div class="modal-overlay" id="modalSetup">
-    <div class="modal">
-      <div class="modal-header"><h2>⚙️ Configurar Banco de Dados</h2><button class="modal-close" onclick="closeModal('modalSetup')">✕</button></div>
-      <div class="modal-body">
-        <p class="modal-info">Cole sua connection string do Neon PostgreSQL para inicializar as tabelas.</p>
-        <label>DATABASE_URL</label>
-        <input type="text" id="setupDbUrl" placeholder="postgresql://user:pass@host/db?sslmode=require" />
-        <div class="modal-actions">
-          <button class="btn btn-primary" onclick="runSetup()">Inicializar Banco</button>
-          <button class="btn btn-outline" onclick="closeModal('modalSetup')">Fechar</button>
-        </div>
-        <div id="setupMsg" class="setup-msg"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modalLote">
-    <div class="modal">
-      <div class="modal-header"><h2 id="modalLoteTitle">Novo Lote</h2><button class="modal-close" onclick="closeModal('modalLote')">✕</button></div>
-      <div class="modal-body">
-        <input type="hidden" id="loteId" />
-        <div class="form-row">
-          <div class="form-group"><label>Nome do Lote *</label><input type="text" id="loteNome" placeholder="Ex: Lote A - Nelore 2024" /></div>
-          <div class="form-group"><label>Raça</label><input type="text" id="loteRaca" placeholder="Ex: Nelore" /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Finalidade</label><select id="loteFinalidade"><option value="corte">Corte</option><option value="leite">Leite</option><option value="recria">Recria</option><option value="cria">Cria</option></select></div>
-          <div class="form-group"><label>Data de Entrada</label><input type="date" id="loteDataEntrada" /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Área (hectares)</label><input type="number" id="loteArea" placeholder="0.00" step="0.01" /></div>
-          <div class="form-group"><label>Status</label><select id="loteStatus"><option value="ativo">Ativo</option><option value="encerrado">Encerrado</option></select></div>
-        </div>
-        <div class="form-group"><label>Observações</label><textarea id="loteObs" placeholder="Observações opcionais..."></textarea></div>
-        <div class="modal-actions">
-          <button class="btn btn-primary" onclick="saveLote()">Salvar</button>
-          <button class="btn btn-outline" onclick="closeModal('modalLote')">Cancelar</button>
+        <div class="form-field">
+          <label class="field-label">Área (hectares)</label>
+          <input class="field-input" type="number" id="loteArea" step="0.01" placeholder="0.00"/>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modalAnimal">
-    <div class="modal">
-      <div class="modal-header"><h2 id="modalAnimalTitle">Novo Animal</h2><button class="modal-close" onclick="closeModal('modalAnimal')">✕</button></div>
-      <div class="modal-body">
-        <input type="hidden" id="animalId" />
-        <div class="form-row">
-          <div class="form-group"><label>Nº Brinco *</label><input type="text" id="animalBrinco" placeholder="Ex: 001" /></div>
-          <div class="form-group"><label>Lote *</label><select id="animalLote"></select></div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Data de Entrada</label>
+          <input class="field-input" type="date" id="loteData"/>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label>Raça</label><input type="text" id="animalRaca" placeholder="Nelore, Angus..." /></div>
-          <div class="form-group"><label>Sexo</label><select id="animalSexo"><option value="macho">Macho</option><option value="femea">Fêmea</option></select></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Peso de Entrada (kg) *</label><input type="number" id="animalPesoEntrada" placeholder="0" step="0.1" oninput="calcArrobaEntrada()" /></div>
-          <div class="form-group"><label>Arrobas Entrada</label><input type="text" id="animalArrobaEntrada" readonly placeholder="—" /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Data de Entrada</label><input type="date" id="animalDataEntrada" /></div>
-          <div class="form-group"><label>Valor de Compra (R$)</label><input type="number" id="animalValorCompra" placeholder="0.00" step="0.01" /></div>
-        </div>
-        <div class="form-group"><label>Observações</label><textarea id="animalObs" placeholder="Observações opcionais..."></textarea></div>
-        <div class="modal-actions">
-          <button class="btn btn-primary" onclick="saveAnimal()">Salvar</button>
-          <button class="btn btn-outline" onclick="closeModal('modalAnimal')">Cancelar</button>
+        <div class="form-field">
+          <label class="field-label">Status</label>
+          <select class="field-select" id="loteStatus">
+            <option value="ativo">✅ Ativo</option>
+            <option value="encerrado">🔴 Encerrado</option>
+          </select>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modalPesagem">
-    <div class="modal">
-      <div class="modal-header"><h2>Nova Pesagem</h2><button class="modal-close" onclick="closeModal('modalPesagem')">✕</button></div>
-      <div class="modal-body">
-        <input type="hidden" id="pesagemId" />
-        <div class="form-row">
-          <div class="form-group"><label>Animal (Brinco) *</label><select id="pesagemAnimal"></select></div>
-          <div class="form-group"><label>Data da Pesagem *</label><input type="date" id="pesagemData" /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Peso (kg) *</label><input type="number" id="pesagemPeso" placeholder="0" step="0.1" oninput="calcArrobaPesagem()" /></div>
-          <div class="form-group"><label>Arrobas</label><input type="text" id="pesagemArroba" readonly placeholder="—" /></div>
-        </div>
-        <div class="form-group"><label>Observações</label><textarea id="pesagemObs" placeholder="Observações opcionais..."></textarea></div>
-        <div class="modal-actions">
-          <button class="btn btn-primary" onclick="savePesagem()">Salvar</button>
-          <button class="btn btn-outline" onclick="closeModal('modalPesagem')">Cancelar</button>
-        </div>
+      <div class="form-field">
+        <label class="field-label">Observações</label>
+        <textarea class="field-textarea" id="loteObs" placeholder="Informações adicionais..."></textarea>
       </div>
     </div>
-  </div>
-
-  <div class="modal-overlay" id="modalVenda">
-    <div class="modal">
-      <div class="modal-header"><h2>Nova Venda</h2><button class="modal-close" onclick="closeModal('modalVenda')">✕</button></div>
-      <div class="modal-body">
-        <input type="hidden" id="vendaId" />
-        <div class="form-row">
-          <div class="form-group"><label>Animal (Brinco) *</label><select id="vendaAnimal"></select></div>
-          <div class="form-group"><label>Data da Venda *</label><input type="date" id="vendaData" /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Peso de Venda (kg) *</label><input type="number" id="vendaPeso" placeholder="0" step="0.1" oninput="calcVenda()" /></div>
-          <div class="form-group"><label>Arrobas</label><input type="text" id="vendaArroba" readonly placeholder="—" /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Valor por @ (R$) *</label><input type="number" id="vendaPrecoArroba" placeholder="0.00" step="0.01" oninput="calcVenda()" /></div>
-          <div class="form-group"><label>Valor Total (R$)</label><input type="text" id="vendaTotal" readonly placeholder="—" /></div>
-        </div>
-        <div class="form-group"><label>Comprador</label><input type="text" id="vendaComprador" placeholder="Nome do comprador" /></div>
-        <div class="form-group"><label>Observações</label><textarea id="vendaObs" placeholder="Observações opcionais..."></textarea></div>
-        <div class="modal-actions">
-          <button class="btn btn-primary" onclick="saveVenda()">Salvar</button>
-          <button class="btn btn-outline" onclick="closeModal('modalVenda')">Cancelar</button>
-        </div>
-      </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="fechar('mLote')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarLote()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Salvar Lote
+      </button>
     </div>
   </div>
+</div>
 
-  <div class="modal-overlay" id="modalCusto">
-    <div class="modal">
-      <div class="modal-header"><h2>Novo Custo</h2><button class="modal-close" onclick="closeModal('modalCusto')">✕</button></div>
-      <div class="modal-body">
-        <input type="hidden" id="custoId" />
-        <div class="form-row">
-          <div class="form-group"><label>Descrição *</label><input type="text" id="custoDescricao" placeholder="Ex: Vacina Aftosa" /></div>
-          <div class="form-group"><label>Categoria *</label><select id="custoCategoria"><option value="alimentacao">Alimentação</option><option value="saude">Saúde / Veterinário</option><option value="mao_de_obra">Mão de Obra</option><option value="infraestrutura">Infraestrutura</option><option value="transporte">Transporte</option><option value="outros">Outros</option></select></div>
+<!-- Modal Animal -->
+<div class="modal-backdrop" id="mAnimal">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-hdr-left">
+        <div class="modal-icon teal">🐄</div>
+        <h3 class="modal-title" id="mAnimalTitle">Novo Animal</h3>
+      </div>
+      <button class="modal-x" onclick="fechar('mAnimal')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="animalId"/>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Nº Brinco <span class="required">*</span></label>
+          <input class="field-input" type="text" id="aBrinco" placeholder="001"/>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label>Lote (opcional)</label><select id="custoLote"><option value="">Geral</option></select></div>
-          <div class="form-group"><label>Data *</label><input type="date" id="custoData" /></div>
-        </div>
-        <div class="form-group"><label>Valor (R$) *</label><input type="number" id="custoValor" placeholder="0.00" step="0.01" /></div>
-        <div class="form-group"><label>Observações</label><textarea id="custoObs" placeholder="Observações opcionais..."></textarea></div>
-        <div class="modal-actions">
-          <button class="btn btn-primary" onclick="saveCusto()">Salvar</button>
-          <button class="btn btn-outline" onclick="closeModal('modalCusto')">Cancelar</button>
+        <div class="form-field">
+          <label class="field-label">Lote <span class="required">*</span></label>
+          <select class="field-select" id="aLote"></select>
         </div>
       </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Raça</label>
+          <input class="field-input" type="text" id="aRaca" placeholder="Nelore, Angus..."/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Sexo</label>
+          <select class="field-select" id="aSexo">
+            <option value="macho">♂ Macho</option>
+            <option value="femea">♀ Fêmea</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Peso Entrada (kg) <span class="required">*</span></label>
+          <input class="field-input" type="number" id="aPeso" step="0.1" placeholder="0" oninput="calcArrEntrada()"/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Arrobas Entrada</label>
+          <input class="field-input readonly" type="text" id="aArroba" readonly placeholder="Calculado auto"/>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Data de Entrada</label>
+          <input class="field-input" type="date" id="aData"/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Valor de Compra (R$)</label>
+          <input class="field-input" type="number" id="aValor" step="0.01" placeholder="0,00"/>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Observações</label>
+        <textarea class="field-textarea" id="aObs" placeholder="Informações adicionais..."></textarea>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="fechar('mAnimal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarAnimal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Salvar Animal
+      </button>
     </div>
   </div>
+</div>
 
-  <div class="toast" id="toast"></div>
-  <script src="app.js"></script>
+<!-- Modal Pesagem -->
+<div class="modal-backdrop" id="mPesagem">
+  <div class="modal-box modal-sm">
+    <div class="modal-hdr">
+      <div class="modal-hdr-left">
+        <div class="modal-icon blue">⚖️</div>
+        <h3 class="modal-title">Nova Pesagem</h3>
+      </div>
+      <button class="modal-x" onclick="fechar('mPesagem')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pesId"/>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Animal (Brinco) <span class="required">*</span></label>
+          <select class="field-select" id="pAnimal"></select>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Data da Pesagem <span class="required">*</span></label>
+          <input class="field-input" type="date" id="pData"/>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Peso (kg) <span class="required">*</span></label>
+          <input class="field-input" type="number" id="pPeso" step="0.1" placeholder="0" oninput="calcArrPes()"/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Arrobas</label>
+          <input class="field-input readonly" type="text" id="pArroba" readonly placeholder="Calculado auto"/>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Observações</label>
+        <textarea class="field-textarea" id="pObs" placeholder="Informações adicionais..."></textarea>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="fechar('mPesagem')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarPesagem()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Registrar Pesagem
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Venda -->
+<div class="modal-backdrop" id="mVenda">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-hdr-left">
+        <div class="modal-icon green">💰</div>
+        <h3 class="modal-title">Nova Venda</h3>
+      </div>
+      <button class="modal-x" onclick="fechar('mVenda')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="vendaId"/>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Animal (Brinco) <span class="required">*</span></label>
+          <select class="field-select" id="vAnimal"></select>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Data da Venda <span class="required">*</span></label>
+          <input class="field-input" type="date" id="vData"/>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Peso de Venda (kg) <span class="required">*</span></label>
+          <input class="field-input" type="number" id="vPeso" step="0.1" placeholder="0" oninput="calcVenda()"/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Arrobas</label>
+          <input class="field-input readonly" type="text" id="vArroba" readonly placeholder="Calculado auto"/>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Preço por Arroba (R$/@) <span class="required">*</span></label>
+          <input class="field-input" type="number" id="vPreco" step="0.01" placeholder="0,00" oninput="calcVenda()"/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Valor Total (R$)</label>
+          <input class="field-input readonly highlight" type="text" id="vTotal" readonly placeholder="Calculado auto"/>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Comprador</label>
+        <input class="field-input" type="text" id="vComprador" placeholder="Nome do comprador"/>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Observações</label>
+        <textarea class="field-textarea" id="vObs" placeholder="Informações adicionais..."></textarea>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="fechar('mVenda')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarVenda()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Registrar Venda
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Custo -->
+<div class="modal-backdrop" id="mCusto">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-hdr-left">
+        <div class="modal-icon red">📋</div>
+        <h3 class="modal-title">Novo Custo</h3>
+      </div>
+      <button class="modal-x" onclick="fechar('mCusto')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="custoId"/>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Descrição <span class="required">*</span></label>
+          <input class="field-input" type="text" id="cDesc" placeholder="Ex: Vacina Aftosa"/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Categoria <span class="required">*</span></label>
+          <select class="field-select" id="cCat">
+            <option value="alimentacao">🌾 Alimentação</option>
+            <option value="saude">💉 Saúde/Vet</option>
+            <option value="mao_de_obra">👷 Mão de Obra</option>
+            <option value="infraestrutura">🏗️ Infraestrutura</option>
+            <option value="transporte">🚛 Transporte</option>
+            <option value="outros">📦 Outros</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-field">
+          <label class="field-label">Lote (opcional)</label>
+          <select class="field-select" id="cLote">
+            <option value="">📋 Geral (todos os lotes)</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Data <span class="required">*</span></label>
+          <input class="field-input" type="date" id="cData"/>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Valor (R$) <span class="required">*</span></label>
+        <input class="field-input" type="number" id="cValor" step="0.01" placeholder="0,00"/>
+      </div>
+      <div class="form-field">
+        <label class="field-label">Observações</label>
+        <textarea class="field-textarea" id="cObs" placeholder="Informações adicionais..."></textarea>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="fechar('mCusto')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarCusto()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Registrar Custo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Toast ── -->
+<div class="toast-container" id="toast"></div>
+
+<script src="app.js"></script>
+
+<script>
+// Mobile menu
+function toggleMobileMenu(){
+  document.getElementById('sidebar').classList.toggle('mobile-open');
+  document.getElementById('sidebarOverlay').classList.toggle('active');
+}
+function closeMobileMenu(){
+  document.getElementById('sidebar').classList.remove('mobile-open');
+  document.getElementById('sidebarOverlay').classList.remove('active');
+}
+
+// Override navigate to update subtitle too
+const _origNavigate = window.navigate;
+const PAGE_SUBTITLES = {
+  dashboard:'Visão geral do seu rebanho',
+  lotes:'Gerencie seus lotes de pastagem',
+  animais:'Cadastro e controle do rebanho',
+  pesagens:'Histórico de pesagens e GMD',
+  vendas:'Registro de comercializações',
+  custos:'Controle de despesas e gastos',
+  financeiro:'Análise financeira completa'
+};
+window.navigate = function(pg){
+  if(_origNavigate) _origNavigate(pg);
+  const sub = document.getElementById('pageSubtitle');
+  if(sub) sub.textContent = PAGE_SUBTITLES[pg]||'';
+  closeMobileMenu();
+};
+</script>
+
 </body>
 </html>
